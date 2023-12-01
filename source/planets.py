@@ -30,18 +30,52 @@ BACKGROUND=2
 TEXTXY=3
 
 slides=[
-        [ IMAGE, "pl_mercury.jpg" ],
-        [ IMAGE, "pl_venus.jpg" ],
-        [ IMAGE, "pl_earth.jpg" ],
-        [ IMAGE, "pl_moon.jpg" ],        
-        [ IMAGE, "pl_mars.jpg" ],
-        [ IMAGE, "pl_jupiter.jpg" ],
-        [ IMAGE, "pl_saturn.jpg" ],
-        [ IMAGE, "pl_uranus.jpg" ],
-        [ IMAGE, "pl_neptune.jpg" ],
-        [ IMAGE, "pl_pluto.jpg" ],
-        [ IMAGE, "pl_thats_no_moon.jpg" ]
+        [ IMAGE, "r1.jpg" ],
+        [ IMAGE, "r2.jpg" ],
+        [ IMAGE, "r3.jpg" ],
+        [ IMAGE, "r4.jpg" ],
+        [ IMAGE, "r5.jpg" ],
+        [ IMAGE, "r6.jpg" ],
+        [ IMAGE, "r7.jpg" ],
+        [ IMAGE, "r8.jpg" ],
+        [ IMAGE, "r9.jpg" ],
+        [ IMAGE, "r10.jpg" ],
+        [ IMAGE, "r11.jpg" ],
+        [ IMAGE, "r12.jpg" ],
+        [ IMAGE, "r13.jpg" ],
+        [ IMAGE, "r14.jpg" ],
+        [ IMAGE, "r15.jpg" ],
+        [ IMAGE, "r16.jpg" ],
+        [ IMAGE, "r17.jpg" ],
+        [ IMAGE, "r18.jpg" ],
+        [ IMAGE, "r19.jpg" ],
+
+        [ IMAGE, "r20.jpg" ],
+        [ IMAGE, "r21.jpg" ],
+        [ IMAGE, "r22.jpg" ],
+        [ IMAGE, "r23.jpg" ],
+        [ IMAGE, "r24.jpg" ],
+        [ IMAGE, "r25.jpg" ],
+        [ IMAGE, "r26.jpg" ],
+        [ IMAGE, "r27.jpg" ],
+        [ IMAGE, "r28.jpg" ],
+        [ IMAGE, "r29.jpg" ],
+
+        [ IMAGE, "r30.jpg" ],
+        [ IMAGE, "r31.jpg" ],
+        [ IMAGE, "r32.jpg" ],
+        [ IMAGE, "r33.jpg" ],
+        [ IMAGE, "r34.jpg" ],
+        [ IMAGE, "r35.jpg" ],
+        [ IMAGE, "r36.jpg" ],
+        
        ]
+
+# if you change the timeout we have to kill the old timer and make a new one
+def update_timer():
+    global tid, timer_rate
+    timer.Timer.remove_timer(tid)
+    tid=timer.Timer.add_timer(timer_rate,next)  # change over
 
 # get next slide
 def next():
@@ -79,11 +113,7 @@ def next():
         current_slide=0   # or recycle
 
 
-# if you change the timeout we have to kill the old timer and make a new one
-def update_timer():
-    global tid, timer_rate
-    timer.Timer.remove_timer(tid)
-    tid=timer.Timer.add_timer(timer_rate,next)  # change over
+
 
 # Joystick
 # Up is delay up, Down is delay down
@@ -102,6 +132,7 @@ def joycb(key):
         update_timer()
     if (key==keyleds.JOY_RT):
         oldpause=pauseflag
+        update_timer()    # reset timer for next auto-next
         pauseflag=False   # make sure it redraws
         next()
         pauseflag=oldpause
@@ -142,3 +173,4 @@ async def vos_main():
 if __name__=="__main__":
     import vectoros
     vectoros.run()
+
